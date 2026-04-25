@@ -49,6 +49,18 @@ def format_matrix(matrix: list[list[float]], fmt: str = ".4f") -> list[str]:
     return lines
 
 
+def process_file_only_with_distribution(filepath: Path) -> list[int]:
+    original = read_matrix(filepath)
+
+    # возводим в квадрат элементы
+    squared = square_matrix(original)
+
+    # находим экстремум в модифицированной мартрице
+    # распределение в extreme_row_index
+    extreme_row_index, extreme_value = find_extremums(squared)
+
+    return extreme_row_index
+
 # функция для одного файла
 def process_file(filepath: Path, output_lines: list[str]) -> None:
     # читаем
@@ -64,6 +76,7 @@ def process_file(filepath: Path, output_lines: list[str]) -> None:
     squared = square_matrix(original)
 
     # находим экстремум в модифицированной мартрице
+    # распределение в extreme_row_index
     extreme_row_index, extreme_value = find_extremums(squared)
 
     # считаем сколько экстремумов нашли в каждой строке (idx) - количество экстремумов в строке
